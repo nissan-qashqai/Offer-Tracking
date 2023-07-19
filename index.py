@@ -12,7 +12,7 @@ Session(app)
 
 def index():
 
-    return render_template('signin.html')
+    return render_template('UI.html')
 
 #Burada tekrardan render edilme sebebi signup sayfasındaki a linkinde kullanmış olmamızdır.
 @app.route('/signin')
@@ -63,7 +63,7 @@ def signup():
     #Kayıt sayfasındaki method post ise yapılıcak.
     if request.method=='POST':
         nick=request.form['uName']
-        sifre=request.form['pass']
+        sifre=request.form['uPas']
 
         
         con = connect("stok.db")
@@ -189,7 +189,7 @@ def bul():
         girdi = request.json['giris']
         con = connect("stok.db")
         cursor = con.cursor()
-        cursor.execute(('SELECT * FROM Teklif WHERE Id=? or Firma=? or Urun=?'), (girdi,girdi,girdi))
+        cursor.execute(("SELECT * FROM Teklif WHERE Durum='Faturalandı'"), (girdi,girdi,girdi))
         rows = cursor.fetchall()
         con.close()
 
